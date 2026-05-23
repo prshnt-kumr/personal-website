@@ -1,0 +1,5 @@
+# Netlify redirects file. One rule per line.
+# Pretty URLs for future expansions:
+/avarna   /#avarna   301
+/book     /#book     301
+/media    /#media    301
