@@ -18,9 +18,169 @@
   .mast-nav a.active { background: rgba(13,37,64,.06); color: var(--navy); font-weight: 600; }
   .back-home { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 8px 0; }
   .back-home:hover { color: var(--navy); }
+
+  /* === LANDING-SPECIFIC: edge-to-edge calm, no left-margin chap-num === */
+  .landing main { max-width: var(--maxw); margin: 0 auto; padding: 0 48px; }
+  .l-hero {
+    padding: 110px 0 80px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  @media (max-width: 1000px) { .l-hero { grid-template-columns: 1fr; gap: 48px; padding: 64px 0 48px; } }
+  .l-eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 26px;
+  }
+  .l-eyebrow .sep { color: var(--gold); margin: 0 12px; }
+  .l-headline {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(54px, 7.2vw, 108px);
+    line-height: .96;
+    letter-spacing: -.035em;
+    color: var(--navy);
+    margin: 0;
+    font-feature-settings: "ss01";
+  }
+  .l-headline .it { font-style: italic; font-weight: 500; color: var(--accent); }
+  .l-headline .ink { color: var(--navy); }
+  .l-aside {
+    border-left: 1px solid var(--rule);
+    padding-left: 36px;
+    padding-bottom: 12px;
+  }
+  @media (max-width: 1000px) { .l-aside { border-left: 0; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 28px; } }
+  .l-aside p {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-size: clamp(17px, 1.4vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-dim);
+    margin: 0 0 24px;
+    font-style: italic;
+  }
+  .l-aside p em { font-style: normal; color: var(--navy); font-weight: 500; }
+  .l-aside .quick {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .l-aside .qtag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    color: var(--ink-dim);
+    letter-spacing: .04em;
+  }
+
+  /* Featured media — full bleed */
+  .l-media {
+    padding: 24px 0 60px;
+  }
+  .l-media .video-stage {
+    position: relative;
+    aspect-ratio: 28 / 9;
+  }
+  @media (max-width: 700px) { .l-media .video-stage { aspect-ratio: 16 / 11; } }
+
+  /* Latest threads — full width grid */
+  .l-threads {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--rule);
+  }
+  .l-threads-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 36px; gap: 24px; flex-wrap: wrap;
+  }
+  .l-threads-head h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 44px);
+    color: var(--navy);
+    letter-spacing: -.02em;
+    margin: 0;
+  }
+  .l-threads-head h2 .it { font-style: italic; color: var(--accent); }
+  .l-threads-head .small {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .l-threads-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 880px) { .l-threads-grid { grid-template-columns: 1fr; } }
+  .l-thread {
+    text-decoration: none;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    box-shadow: var(--shadow-sm);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    display: flex; flex-direction: column;
+    min-height: 280px;
+  }
+  .l-thread:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--rule-strong); }
+  .l-thread .lt-eb {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent-deep);
+  }
+  .l-thread h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--navy);
+    margin: 12px 0 10px;
+    letter-spacing: -.018em;
+    line-height: 1.12;
+  }
+  .l-thread h3 .it { font-style: italic; color: var(--accent); }
+  .l-thread p { color: var(--ink-dim); font-size: 14.5px; margin: 0 0 18px; flex: 1; line-height: 1.55; }
+  .l-thread .lt-cta {
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 13.5px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .l-thread .lt-cta .arr { transition: transform .2s ease; }
+  .l-thread:hover .lt-cta .arr { transform: translate(4px, 0); }
+
+  /* Quiet sign-off */
+  .l-signoff {
+    padding: 96px 0 80px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 1000px) { .l-signoff { grid-template-columns: 1fr; gap: 32px; padding: 64px 0; } }
+  .l-signoff p {
+    font-family: "Fraunces", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 34px);
+    color: var(--navy);
+    line-height: 1.28;
+    margin: 0;
+    letter-spacing: -.012em;
+  }
+  .l-signoff p em { font-style: normal; color: var(--accent); }
+  .l-signoff-cta { justify-self: end; }
+  @media (max-width: 1000px) { .l-signoff-cta { justify-self: start; } }
 </style>
 </head>
-<body>
+<body class="landing">
 
 <header class="masthead">
   <div class="mast-inner">
@@ -51,102 +211,14 @@
 <main id="top">
 
   <!-- HERO -->
-  <section class="chap reveal" style="padding-top: 56px;">
-    <div class="chap-num">—<small>Field note</small></div>
-    <div class="chap-body" style="max-width: 900px;">
-      <div class="chap-kicker">Welcome</div>
-      <h1 class="chap-title" style="font-size: clamp(40px, 5.4vw, 68px);">
-        Building <span class="it">trustworthy AI</span> — and writing the field guide that explains why.
+  <section class="l-hero reveal">
+    <div>
+      <div class="l-eyebrow">Field note <span class="sep">·</span> May 2026</div>
+      <h1 class="l-headline">
+        Building <span class="it">trustworthy AI</span><br/>
+        <span class="ink">— and writing the<br/>field guide</span> <span class="it">why</span>.
       </h1>
-      <p class="chap-dek" style="max-width: 720px;">
-        I'm Prashant Kumar — AI architect, author of <em>Machine Learning to Gen AI Agents</em>, currently prototyping <em>Avarna Privacy Gateway</em>. This site is a quiet place to follow that work.
-      </p>
     </div>
-  </section>
-
-  <!-- FEATURED MEDIA — the catchy slot -->
-  <section class="opener reveal" style="padding-top: 40px;">
-    <div class="opener-grid">
-      <div class="opener-meta">Featured · Latest work · Updated regularly</div>
-      <div>
-        <div class="video-stage" id="featured-video">
-          <!-- Replace with:
-               <video controls preload="metadata" poster="assets/media/latest-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-                 <source src="assets/media/latest.mp4" type="video/mp4" />
-               </video>
-               or an <audio controls> tag for the book chapter -->
-          <div class="video-overlay">
-            <div>
-              <div class="video-label">Latest · placeholder</div>
-              <h1 class="video-title">Drop a <em>video or audio file</em> into <code style="font-family:'JetBrains Mono',monospace;color:#cfe1f5">assets/media/</code> — the agent will wire it into this slot.</h1>
-            </div>
-            <a class="video-play" href="/avarna/"><span class="tri">▶</span> Explore Avarna</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3 LATEST-WORK CARDS — links to deeper pages -->
-  <section class="chap reveal" style="padding-top: 80px;">
-    <div class="chap-num">·<small>Latest</small></div>
-    <div class="chap-body">
-      <div class="chap-kicker">Now happening</div>
-      <h2 class="chap-title" style="font-size: clamp(28px, 3.4vw, 40px); margin-bottom: 28px;">A few <span class="it">threads</span> worth pulling.</h2>
-
-      <div class="practice" style="grid-template-columns: repeat(3, 1fr);">
-        <a href="/avarna/" class="pcard" style="text-decoration: none; grid-column: span 1; display:flex; flex-direction:column;">
-          <div class="pnum">a. Product</div>
-          <h3 style="color: var(--navy);">Avarna Privacy <span class="it">Gateway</span></h3>
-          <p>3-layer PII detection · 97% accuracy · sub-second round-trip. A working POC, not a company yet.</p>
-          <div class="pmeta" style="margin-top: auto"><span class="tag">Read the case study →</span></div>
-        </a>
-        <a href="/book/" class="pcard" style="text-decoration: none; grid-column: span 1; display:flex; flex-direction:column;">
-          <div class="pnum">b. Book</div>
-          <h3 style="color: var(--navy);">Machine Learning <span class="it">to Gen AI Agents</span></h3>
-          <p>A conceptual journey from foundations to practice. Eighteen chapters, 177 glossary terms, Kindle-ready.</p>
-          <div class="pmeta" style="margin-top: auto"><span class="tag">Open the book →</span></div>
-        </a>
-        <a href="/insights/" class="pcard" style="text-decoration: none; grid-column: span 1; display:flex; flex-direction:column;">
-          <div class="pnum">c. Writing</div>
-          <h3 style="color: var(--navy);">Essays &amp; <span class="it">briefings</span></h3>
-          <p>Notes on privacy budgets, prompt injection as supply-chain, and evals that actually predict production.</p>
-          <div class="pmeta" style="margin-top: auto"><span class="tag">Read latest →</span></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Quiet contact strip -->
-  <section class="chap reveal" style="padding: 80px 0 32px;">
-    <div class="chap-num">·<small>Reach</small></div>
-    <div class="chap-body">
-      <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(22px, 2.4vw, 32px); color: var(--navy); line-height: 1.3; margin: 0 0 18px; max-width: 720px;">
-        Working on something privacy-sensitive with AI? Writing a book that needs a technical second reader? Both reach me at the same inbox.
-      </p>
-      <a class="btn btn-p" href="/about/#contact">Get in touch ↗</a>
-    </div>
-  </section>
-
-</main>
-
-<footer class="colophon">
-  <div>© <span id="yr"></span> Prashant Kumar · all rights reserved</div>
-  <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
-  <div style="text-align:right">v3 · 2026-05</div>
-</footer>
-
-<script>
-  const now = new Date();
-  document.getElementById('yr').textContent = now.getFullYear();
-  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  const dateEl = document.getElementById('issue-date');
-  if (dateEl) dateEl.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, { threshold: 0.10 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
-
-</body>
-</html>
+    <aside class="l-aside">
+      <p>
+        I'm <em>Prashant K
