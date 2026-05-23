@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Insights — essays &amp; briefings · Prashant Kumar</title>
+<meta name="description" content="Essays, briefings, and live notebooks on AI, privacy, and what it takes to ship." />
+<meta name="theme-color" content="#0d2540" />
+<meta property="og:title" content="Insights — essays &amp; briefings · Prashant Kumar" />
+<meta property="og:description" content="Recent essays on privacy budgets, prompt injection, evals." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/style.css" />
+<style>
+  /* Multi-page additions */
+  .mast-nav a.active { background: rgba(13,37,64,.06); color: var(--navy); font-weight: 600; }
+  .back-home { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 8px 0; }
+  .back-home:hover { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="mast-inner">
+    <a class="mast-brand" href="/">
+      <span class="mast-mono">pk.</span>
+      <span class="mast-name">Prashant Kumar</span>
+    </a>
+    <div class="mast-tag">AI Architect · Author · Building Avarna Privacy Gateway (POC)</div>
+    <nav class="mast-nav">
+      <a href="/avarna/">Avarna</a>
+      <a href="/book/">Book</a>
+      <a href="/practice/">Practice</a>
+      <a href="/insights/" class="active">Insights</a>
+      <a href="/about/">About</a>
+      <a class="cta" href="/about/#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<div class="issue-rule">
+  <div class="issue-inner">
+    <span>Issue 01 · Vol. I</span>
+    <span class="live">Currently building — Avarna v4 (POC) · Book audio edition</span>
+    <span id="issue-date">— · 2026</span>
+  </div>
+</div>
+
+<main id="top">
+<a class="back-home" href="/" style="display:block; padding: 24px 0 0;">← Home</a>
+<section id="insights" class="chap reveal">
+    <div class="chap-num">05<small>Insights</small></div>
+    <div class="chap-body">
+      <div class="chap-kicker">Recent writing</div>
+      <h2 class="chap-title">Essays, briefings, working <span class="it">notebooks</span>.</h2>
+      <p class="chap-dek">A lead article, plus two shorter notes. The agent rotates the list as new pieces ship.</p>
+
+      <div class="insights">
+        <article class="lead-essay">
+          <div class="kk">Lead essay · 9 min read</div>
+          <h3>The <span class="it">privacy budget</span> every AI product needs.</h3>
+          <p>"We'll add privacy later" is the most expensive sentence in modern AI engineering. Once user prompts have left your perimeter unprotected, there is no later — only an incident.</p>
+          <div class="pull">A privacy budget says: this is the maximum information we are willing to leak per request, this is how we measure it, and this is who gets paged when it's crossed.</div>
+          <p>The essay walks through how to set one — what to count, what to ignore, and the three failure modes that show up before anyone notices.</p>
+          <a class="read" href="#">Read essay →</a>
+        </article>
+        <div class="more-stack">
+          <article class="mi">
+            <div class="kk">Briefing · 5 min</div>
+            <h4>Prompt injection is a <span style="font-style:italic;color:var(--accent-deep)">supply-chain</span> problem.</h4>
+            <p>Reframing LLM attacks as a software supply-chain question — and what that unlocks for defenders.</p>
+            <a href="#">Read briefing →</a>
+          </article>
+          <article class="mi">
+            <div class="kk">Notebook · live</div>
+            <h4>Evals that actually predict <span style="font-style:italic;color:var(--accent-deep)">production</span>.</h4>
+            <p>Patterns that have survived contact with real users and real bug reports.</p>
+            <a href="#">Open notebook →</a>
+          </article>
+          <article class="mi">
+            <div class="kk">Talk · 18 min · video</div>
+            <h4>Shipping AI you can <span style="font-style:italic;color:var(--accent-deep)">defend</span>.</h4>
+            <p>How privacy, security, and product design fit together — recorded at [Conference, 2025].</p>
+            <a href="/">Watch talk →</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div>© <span id="yr"></span> Prashant Kumar · all rights reserved</div>
+  <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
+  <div style="text-align:right">v3 · 2026-05</div>
+</footer>
+
+<script>
+  const now = new Date();
+  document.getElementById('yr').textContent = now.getFullYear();
+  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const dateEl = document.getElementById('issue-date');
+  if (dateEl) dateEl.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

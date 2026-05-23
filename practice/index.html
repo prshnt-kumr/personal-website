@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Practice — what I work on · Prashant Kumar</title>
+<meta name="description" content="Six areas of practice: LLM apps, model training, MLOps, AI safety & privacy, writing, open source." />
+<meta name="theme-color" content="#0d2540" />
+<meta property="og:title" content="Practice — what I work on · Prashant Kumar" />
+<meta property="og:description" content="Six areas of practice across LLM apps, training, MLOps, safety, and writing." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/style.css" />
+<style>
+  /* Multi-page additions */
+  .mast-nav a.active { background: rgba(13,37,64,.06); color: var(--navy); font-weight: 600; }
+  .back-home { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 8px 0; }
+  .back-home:hover { color: var(--navy); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="mast-inner">
+    <a class="mast-brand" href="/">
+      <span class="mast-mono">pk.</span>
+      <span class="mast-name">Prashant Kumar</span>
+    </a>
+    <div class="mast-tag">AI Architect · Author · Building Avarna Privacy Gateway (POC)</div>
+    <nav class="mast-nav">
+      <a href="/avarna/">Avarna</a>
+      <a href="/book/">Book</a>
+      <a href="/practice/" class="active">Practice</a>
+      <a href="/insights/">Insights</a>
+      <a href="/about/">About</a>
+      <a class="cta" href="/about/#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<div class="issue-rule">
+  <div class="issue-inner">
+    <span>Issue 01 · Vol. I</span>
+    <span class="live">Currently building — Avarna v4 (POC) · Book audio edition</span>
+    <span id="issue-date">— · 2026</span>
+  </div>
+</div>
+
+<main id="top">
+<a class="back-home" href="/" style="display:block; padding: 24px 0 0;">← Home</a>
+<section id="practice" class="chap reveal">
+    <div class="chap-num">04<small>Practice</small></div>
+    <div class="chap-body">
+      <div class="chap-kicker">Where the work lives</div>
+      <h2 class="chap-title">From foundations to <span class="it">agents in production</span>.</h2>
+      <p class="chap-dek">Six areas of practice. Each one is somewhere I've shipped, taught, or written about. The GitHub feed slots in once linked.</p>
+
+      <div class="practice">
+        <article class="pcard">
+          <div class="pnum">a. Applications</div>
+          <h3>LLM apps &amp; <span class="it">agents in production</span></h3>
+          <p>Agentic workflows, tool use, planning loops, retrieval pipelines, evals — the unglamorous plumbing that turns a clever prompt into a reliable product.</p>
+          <div class="pmeta"><span class="tag">LangGraph</span><span class="tag">RAG</span><span class="tag">Evals</span><span class="tag">Tool-use</span></div>
+        </article>
+        <article class="pcard">
+          <div class="pnum">b. Foundations</div>
+          <h3>Model training, tuning &amp; <span class="it">alignment</span></h3>
+          <p>Fine-tuning open-weights models for domain tasks, preference optimization (DPO/PPO), distillation for cost &amp; latency wins.</p>
+          <div class="pmeta"><span class="tag">PyTorch</span><span class="tag">LoRA / QLoRA</span><span class="tag">DPO · PPO</span></div>
+        </article>
+        <article class="pcard">
+          <div class="pnum">c. Infra</div>
+          <h3>MLOps &amp; <span class="it">infra</span></h3>
+          <p>Reproducible pipelines, vector DBs, GPU scheduling, observability — so the model you ship is the model you trained.</p>
+          <div class="pmeta"><span class="tag">K8s</span><span class="tag">Ray</span><span class="tag">W&amp;B</span></div>
+        </article>
+        <article class="pcard">
+          <div class="pnum">d. Safety</div>
+          <h3>AI safety &amp; <span class="it">privacy</span></h3>
+          <p>Threat modeling for AI, prompt-injection defense, PII scrubbing — the focus area behind Avarna.</p>
+          <div class="pmeta"><span class="tag">Threats</span><span class="tag">PETs</span><span class="tag">NIST AI RMF</span></div>
+        </article>
+        <article class="pcard">
+          <div class="pnum">e. Writing</div>
+          <h3>Essays, talks &amp; the <span class="it">book</span></h3>
+          <p>Long-form essays, an authored book, and conference talks. I learn by writing — and write so others can shortcut my mistakes.</p>
+          <div class="pmeta"><span class="tag">Book</span><span class="tag">Essays</span><span class="tag">Talks</span></div>
+        </article>
+        <article class="pcard">
+          <div class="pnum">f. Open source · spanning the page</div>
+          <h3>Small, sharp tools <span class="it">released under permissive licenses</span> — the GitHub feed is pulled live once linked.</h3>
+          <div class="pmeta"><span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">Rust (learning)</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="colophon">
+  <div>© <span id="yr"></span> Prashant Kumar · all rights reserved</div>
+  <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
+  <div style="text-align:right">v3 · 2026-05</div>
+</footer>
+
+<script>
+  const now = new Date();
+  document.getElementById('yr').textContent = now.getFullYear();
+  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const dateEl = document.getElementById('issue-date');
+  if (dateEl) dateEl.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
