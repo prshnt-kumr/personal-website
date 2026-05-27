@@ -221,4 +221,93 @@
     </div>
     <aside class="l-aside">
       <p>
-        I'm <em>Prashant K
+        I'm <em>Prashant Kumar</em>. AI architect. Author of <em>Machine Learning to Gen AI Agents</em>. Currently prototyping <em>Avarna Privacy Gateway</em> — a working POC for keeping AI workloads private by default.
+      </p>
+      <div class="quick">
+        <span class="qtag">Calgary · Canada</span>
+        <span class="qtag">Available — Q3 2026</span>
+        <span class="qtag">Speaking · advisory</span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- FEATURED MEDIA — the catchy slot -->
+  <section class="l-media reveal">
+    <div class="video-stage" id="featured-video">
+      <!-- Replace with:
+           <video controls preload="metadata" poster="assets/media/latest-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+             <source src="assets/media/latest.mp4" type="video/mp4" />
+           </video>
+           or an <audio controls> tag for the book chapter -->
+      <div class="video-overlay">
+        <div>
+          <div class="video-label">Latest · placeholder</div>
+          <h2 class="video-title">Drop a <em>video or audio file</em> into <code style="font-family:'JetBrains Mono',monospace;color:#cfe1f5">assets/media/</code> — the agent wires it into this slot automatically.</h2>
+        </div>
+        <a class="video-play" href="/avarna/"><span class="tri">▶</span> Explore Avarna</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 LATEST-WORK CARDS — links to deeper pages -->
+  <section class="l-threads reveal">
+    <div class="l-threads-head">
+      <h2>Three <span class="it">threads</span> worth pulling.</h2>
+      <div class="small">Updated regularly · 2026</div>
+    </div>
+
+    <div class="l-threads-grid">
+      <a href="/avarna/" class="l-thread">
+        <div class="lt-eb">01 · Product</div>
+        <h3>Avarna Privacy <span class="it">Gateway</span></h3>
+        <p>Three-layer PII detection. 97% accuracy. Sub-second round-trip on consumer GPUs. A working POC — not a company yet.</p>
+        <span class="lt-cta">Read the case study <span class="arr">→</span></span>
+      </a>
+      <a href="/book/" class="l-thread">
+        <div class="lt-eb">02 · Book</div>
+        <h3>Machine Learning to <span class="it">Gen AI Agents</span></h3>
+        <p>A conceptual journey from foundations to practice. Eighteen chapters, a 177-term glossary, Kindle-ready. Audio edition in production.</p>
+        <span class="lt-cta">Open the book <span class="arr">→</span></span>
+      </a>
+      <a href="/insights/" class="l-thread">
+        <div class="lt-eb">03 · Writing</div>
+        <h3>Essays &amp; <span class="it">briefings</span></h3>
+        <p>Notes on privacy budgets, prompt-injection as a supply-chain problem, and evals that actually survive contact with production.</p>
+        <span class="lt-cta">Read latest <span class="arr">→</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Quiet sign-off -->
+  <section class="l-signoff reveal">
+    <p>
+      Building something <em>privacy-sensitive</em> with AI?<br/>
+      Writing a book that needs a technical second reader?<br/>
+      Both reach me at the same inbox.
+    </p>
+    <div class="l-signoff-cta">
+      <a class="btn btn-p" href="/about/#contact">Get in touch <span class="arr">↗</span></a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div>© <span id="yr"></span> Prashant Kumar · all rights reserved</div>
+  <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
+  <div style="text-align:right">v3 · 2026-05</div>
+</footer>
+
+<script>
+  const now = new Date();
+  document.getElementById('yr').textContent = now.getFullYear();
+  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const dateEl = document.getElementById('issue-date');
+  if (dateEl) dateEl.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
