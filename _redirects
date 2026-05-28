@@ -1,5 +1,13 @@
-# Netlify redirects file. One rule per line.
-# Pretty / short URLs:
-/avanta   /avarna/   301
-/contact  /about/#contact  301
-/home     /          301
+# Netlify redirects — preserve old URLs from the 6-tab era
+/avanta      /poc/#avarna   301
+/avanta/     /poc/#avarna   301
+/avarna      /poc/#avarna   301
+/avarna/     /poc/#avarna   301
+/book        /resources/#book      301
+/book/       /resources/#book      301
+/practice    /about/        301
+/practice/   /about/        301
+/insights    /resources/#essays    301
+/insights/   /resources/#essays    301
+/contact     /about/#contact       301
+/home        /                     301

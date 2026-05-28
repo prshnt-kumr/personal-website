@@ -3,21 +3,244 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About — journey &amp; contact · Prashant Kumar</title>
-<meta name="description" content="Prashant Kumar — short journey, what's happening now, and how to reach me." />
+<title>About — Prashant Kumar</title>
+<meta name="description" content="About Prashant Kumar — AI architect and author based in Calgary, Canada." />
 <meta name="theme-color" content="#0d2540" />
-<meta property="og:title" content="About — journey &amp; contact · Prashant Kumar" />
-<meta property="og:description" content="Engineer, author, builder. Journey, manifesto, contact." />
+<meta property="og:title" content="About — Prashant Kumar" />
+<meta property="og:description" content="Engineer turned architect. Author of a field guide on AI. Builder of POCs." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/assets/style.css" />
 <style>
-  /* Multi-page additions */
   .mast-nav a.active { background: rgba(13,37,64,.06); color: var(--navy); font-weight: 600; }
   .back-home { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 8px 0; }
   .back-home:hover { color: var(--navy); }
+
+  /* === Portrait + bio block === */
+  .portrait-hero {
+    padding: 80px 0 60px;
+    display: grid;
+    grid-template-columns: minmax(280px, 380px) 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 880px) { .portrait-hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0; } }
+  .portrait {
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
+    background:
+      url('/assets/portrait.jpg') center / cover no-repeat,
+      radial-gradient(circle at 30% 30%, #cdd9e6, transparent 55%),
+      linear-gradient(160deg, #e6ebf2, #95a6ba);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .portrait .placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 24px;
+    color: var(--navy);
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 14px;
+    background: linear-gradient(160deg, rgba(230,235,242,.92), rgba(149,166,186,.92));
+  }
+  /* Hide placeholder when portrait.jpg loads */
+  .portrait[data-loaded="true"] .placeholder { display: none; }
+
+  .bio-eyebrow {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 18px;
+  }
+  .bio-eyebrow .sep { color: var(--gold); margin: 0 10px; }
+  .bio-name {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: .98;
+    letter-spacing: -.03em;
+    color: var(--navy);
+    margin: 0 0 12px;
+  }
+  .bio-name .it { font-style: italic; color: var(--accent); }
+  .bio-role {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--ink-dim);
+    margin: 0 0 24px;
+  }
+  .bio-role em { font-style: normal; color: var(--accent-deep); font-weight: 500; }
+  .bio-blurb {
+    font-size: 16px;
+    color: var(--ink-dim);
+    line-height: 1.65;
+    max-width: 580px;
+    margin: 0 0 24px;
+  }
+  .bio-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  /* === Latest & Trending strip === */
+  .latest-strip {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--rule);
+  }
+  .latest-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
+  }
+  .latest-head h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: clamp(26px, 3vw, 38px);
+    color: var(--navy);
+    letter-spacing: -.018em;
+    margin: 0;
+  }
+  .latest-head h2 .it { font-style: italic; color: var(--accent); }
+  .latest-head .updated {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  .latest-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 880px) { .latest-grid { grid-template-columns: 1fr; } }
+  .lcard {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 28px;
+    display: flex; flex-direction: column;
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    position: relative;
+  }
+  .lcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--rule-strong); }
+  .lcard.featured { border-top: 3px solid var(--accent); }
+  .lcard .badge {
+    align-self: flex-start;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: .16em; text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .lcard .meta {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--accent-deep);
+    margin-bottom: 10px;
+  }
+  .lcard h3 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--navy);
+    margin: 0 0 8px;
+    line-height: 1.18;
+    letter-spacing: -.012em;
+  }
+  .lcard h3 .it { font-style: italic; color: var(--accent); }
+  .lcard p { color: var(--ink-dim); font-size: 14px; margin: 0 0 16px; line-height: 1.55; flex: 1; }
+  .lcard .read {
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 13.5px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .lcard .arr { transition: transform .2s ease; }
+  .lcard:hover .arr { transform: translate(4px,0); }
+
+  /* === Now building strip === */
+  .now-strip {
+    padding: 50px 0 30px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    border-top: 1px solid var(--rule);
+  }
+  @media (max-width: 880px) { .now-strip { grid-template-columns: 1fr; gap: 16px; } }
+  .now-strip h3 {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--navy);
+    letter-spacing: -.012em;
+    margin: 0;
+  }
+  .now-strip h3 small {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-style: normal;
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .now-list-clean { list-style: none; padding: 0; margin: 0; }
+  .now-list-clean li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 110px 1fr auto;
+    gap: 18px;
+    align-items: baseline;
+  }
+  .now-list-clean li:last-child { border-bottom: 0; }
+  .now-list-clean .when {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  .now-list-clean .what { color: var(--ink); font-size: 15.5px; }
+  .now-list-clean .what em { color: var(--accent-deep); font-style: normal; font-weight: 500; }
+  .now-list-clean .tag-status {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* === Sign off === */
+  .signoff-clean {
+    padding: 80px 0 60px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 880px) { .signoff-clean { grid-template-columns: 1fr; gap: 24px; padding: 56px 0; } }
+  .signoff-clean p {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.4vw, 30px);
+    color: var(--navy);
+    line-height: 1.32;
+    margin: 0;
+    letter-spacing: -.012em;
+  }
+  .signoff-clean p em { font-style: normal; color: var(--accent); }
 </style>
 </head>
 <body>
@@ -28,13 +251,12 @@
       <span class="mast-mono">pk.</span>
       <span class="mast-name">Prashant Kumar</span>
     </a>
-    <div class="mast-tag">AI Architect · Author · Building Avarna Privacy Gateway (POC)</div>
+    <div class="mast-tag">AI Architect · Author · Building POCs</div>
     <nav class="mast-nav">
-      <a href="/avarna/">Avarna</a>
-      <a href="/book/">Book</a>
-      <a href="/practice/">Practice</a>
-      <a href="/insights/">Insights</a>
+      <a href="/">Home</a>
       <a href="/about/" class="active">About</a>
+      <a href="/resources/">Resources</a>
+      <a href="/poc/">POC</a>
       <a class="cta" href="/about/#contact">Get in touch</a>
     </nav>
   </div>
@@ -43,28 +265,37 @@
 <div class="issue-rule">
   <div class="issue-inner">
     <span>Issue 01 · Vol. I</span>
-    <span class="live">Currently building — Avarna v4 (POC) · Book audio edition</span>
+    <span class="live">Currently building — Avarna v4 · Stock Predictor · Multi-Agent</span>
     <span id="issue-date">— · 2026</span>
   </div>
 </div>
 
 <main id="top">
-<a class="back-home" href="/" style="display:block; padding: 24px 0 0;">← Home</a>
-<section class="manifesto reveal" id="manifesto">
-    <div class="manifesto-num">01<small>Manifesto</small></div>
-    <div class="manifesto-text">
-      The fastest way to make an AI product fail is to add privacy <span class="it">later</span>. So I'm prototyping a gateway that lets teams add it from <span class="it">day one</span> — and writing the book that explains why it matters — without sacrificing speed, model choice, or sleep.
+
+  <section class="portrait-hero reveal">
+    <div class="portrait">
+      <div class="placeholder">
+        Drop your headshot at<br/>
+        <code style="font-family:'JetBrains Mono',monospace;font-style:normal;font-size:11.5px;background:rgba(13,37,64,.08);padding:2px 6px;border-radius:4px">assets/portrait.jpg</code>
+      </div>
     </div>
-    <aside class="manifesto-now">
-      <h4>Now</h4>
-      <ul class="now-list">
-        <li><span class="yr">2026 · Q2</span><span class="wh"><em>Avarna v4 (POC)</em> — sub-second round-trip on consumer GPUs.</span></li>
-        <li><span class="yr">2026 · Q2</span><span class="wh"><em>Audio edition</em> of the book in production.</span></li>
-        <li><span class="yr">2025</span><span class="wh"><em>Published</em> — Machine Learning to Gen AI Agents.</span></li>
-        <li><span class="yr">Ongoing</span><span class="wh">Essays on privacy, evals, agents.</span></li>
-      </ul>
-    </aside>
-  </section><section id="journey" class="chap reveal">
+    <div>
+      <div class="bio-eyebrow">About <span class="sep">·</span> Calgary, Canada</div>
+      <h1 class="bio-name">A short <span class="it">bio</span>.</h1>
+      <p class="bio-blurb">
+        I'm an applied AI/ML engineer turned architect. I've spent the last several years shipping intelligent software — from classical ML pipelines to retrieval, agents, and fine-tuned open-weights models. Along the way I wrote <em>Machine Learning to Gen AI Agents</em>, a field guide for people who'd rather build than slide-deck.
+      </p>
+      <p class="bio-blurb">
+        Today I prototype the tools the book describes — chief among them <em>Avarna Privacy Gateway</em>, a POC for keeping AI workloads private by default. None of these are companies yet; all of them are working proofs.
+      </p>
+      <div class="bio-ctas">
+        <a class="btn btn-p" href="#contact">Get in touch <span class="arr">↗</span></a>
+        <a class="btn btn-s" href="/resources/">Read the book</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey" class="chap reveal">
     <div class="chap-num">06<small>Path</small></div>
     <div class="chap-body">
       <div class="chap-kicker">Landmarks</div>
@@ -94,7 +325,9 @@
         </article>
       </div>
     </div>
-  </section><section id="contact" class="chap reveal">
+  </section>
+
+  <section id="contact" class="chap reveal">
     <div class="chap-num" style="color:#9cc4f0">07<small>Contact</small></div>
     <div class="chap-body">
       <div class="signoff">
@@ -112,12 +345,13 @@
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="colophon">
-  <div>© <span id="yr"></span> Prashant Kumar · all rights reserved</div>
+  <div>© <span id="yr"></span> Prashant Kumar · Calgary, Canada · all rights reserved</div>
   <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
-  <div style="text-align:right">v3 · 2026-05</div>
+  <div style="text-align:right">v4 · 2026-05</div>
 </footer>
 
 <script>
@@ -130,6 +364,13 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.10 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  // If portrait.jpg loads successfully, mark portrait container so placeholder hides
+  const portrait = document.querySelector('.portrait');
+  if (portrait) {
+    const img = new Image();
+    img.onload = () => portrait.setAttribute('data-loaded', 'true');
+    img.src = '/assets/portrait.jpg';
+  }
 </script>
 
 </body>
