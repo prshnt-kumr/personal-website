@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stock Predictor — Prashant Kumar</title>
+<meta name="description" content="A research POC for whether modern ML can find usable edges in public market data — and what an honest workflow on top of that signal would look like." />
+<meta name="theme-color" content="#0d2540" />
+<meta property="og:title" content="Stock Predictor — Prashant Kumar" />
+<meta property="og:description" content="Research POC for ML on noisy public market data. Honest framing, plain English." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/style.css" />
+<style>
+  .mast-nav a.active { background: rgba(13,37,64,.06); color: var(--navy); font-weight: 600; }
+  .back-poc { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 24px 0 0; font-family: "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .back-poc:hover { color: var(--navy); }
+  .deck-frame { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow-md); }
+  .video-frame { width: 100%; aspect-ratio: 16/9; border-radius: var(--radius); background: linear-gradient(135deg, var(--navy), var(--navy-700)); position: relative; overflow: hidden; border: 1px solid var(--rule-strong); box-shadow: var(--shadow-lg); display:flex; align-items:center; justify-content:center; color:#cfe1f5; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; }
+  .status-pill { display: inline-flex; align-items: center; gap: 8px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; background: var(--accent-soft); color: var(--navy); padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
+  .status-pill .dot { width:8px; height:8px; border-radius:50%; background:#2bb673; }
+  .status-pill.early .dot { background:#f4a32a; }
+  .status-pill.vision .dot { background:#7a5fc7; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="mast-inner">
+    <a class="mast-brand" href="/"><span class="mast-mono">pk.</span><span class="mast-name">Prashant Kumar</span></a>
+    <div class="mast-tag">AI Architect · Author · Building POCs</div>
+    <nav class="mast-nav">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/resources/">Resources</a>
+      <a href="/poc/" class="active">POC</a>
+      <a class="cta" href="/about/#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<div class="issue-rule">
+  <div class="issue-inner">
+    <span>Issue 01 · Vol. I</span>
+    <span class="live">Currently building — Avarna v4 · Stock Predictor · Secure Multi-Agent</span>
+    <span id="issue-date">— · 2026</span>
+  </div>
+</div>
+
+<main id="top">
+
+  <a class="back-poc" href="/poc/">← All POCs</a>
+
+  <section class="chap reveal" style="padding-top: 24px;">
+    <div class="chap-num">02<small>Markets</small></div>
+    <div class="chap-body">
+      <span class="status-pill early"><span class="dot"></span> Early POC · build in progress</span>
+      <h1 class="chap-title">Stock <span class="it">Predictor</span>.</h1>
+      <p class="chap-dek">An applied-ML POC for figuring out whether modern models can find usable edges in public market data — and what a real workflow on top of that edge would actually look like.</p>
+    </div>
+  </section>
+
+  <section class="chap reveal">
+    <div class="chap-num">·<small>Why</small></div>
+    <div class="chap-body" style="max-width: 760px;">
+      <div class="chap-kicker">The problem</div>
+      <h2 class="chap-title">Most "prediction" tools are <span class="it">demos in a dress</span>.</h2>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 24px 0 0;">
+        Markets are noisy by design. Most ML pipelines that claim to predict prices either (a) overfit on a thin slice of history, (b) leak future information into training, or (c) work on backtests and quietly fail the moment they meet a live data feed. The interesting question isn't "can a model predict the next tick" — it's "can a model produce a signal that, after fees and latency and slippage, is still worth acting on."
+      </p>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        That's what this POC is for. Not to ship a robo-advisor, not to compete with quant funds. To find out, on a small budget and with public data, whether the answer is yes — and if it is, what the smallest real workflow around that signal would look like for someone managing their own portfolio.
+      </p>
+    </div>
+  </section>
+
+  <section class="chap reveal">
+    <div class="chap-num">·<small>Scope</small></div>
+    <div class="chap-body" style="max-width: 760px;">
+      <div class="chap-kicker">What we're building</div>
+      <h2 class="chap-title">In <span class="it">plain English</span>.</h2>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 24px 0 0;">
+        A research pipeline that takes a basket of equities, pulls public price and fundamental data, builds features at multiple timescales, trains a family of models, and reports honest out-of-sample performance — net of trading frictions. Then, on top of whatever survives that gauntlet, a small workflow that turns the signal into something a human can act on, with clear stop conditions and a fully auditable trade history.
+      </p>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        Important: this is research, not financial advice. If the results don't survive, that's a result too — and an honest one.
+      </p>
+    </div>
+  </section>
+
+  <section class="chap reveal">
+    <div class="chap-num">·<small>End state</small></div>
+    <div class="chap-body" style="max-width: 760px;">
+      <div class="chap-kicker">Where it ends</div>
+      <h2 class="chap-title">Three possible <span class="it">landing zones</span>.</h2>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 24px 0 0;">
+        Option A — the signal works, but only marginally: writeup, open-source the pipeline, publish the methodology so others can build on it.
+      </p>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 14px 0 0;">
+        Option B — the signal works and is meaningfully durable: a small tool I run for myself, with the option to share access carefully.
+      </p>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 14px 0 0;">
+        Option C — the signal doesn't survive proper testing: an honest writeup of why, and what the field gets wrong about backtests. Often the most useful kind of result.
+      </p>
+    </div>
+  </section>
+
+  <section class="chap reveal">
+    <div class="chap-num">·<small>Now</small></div>
+    <div class="chap-body" style="max-width: 760px;">
+      <div class="chap-kicker">Status</div>
+      <h2 class="chap-title">Where we are <span class="it">today</span>.</h2>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 24px 0 0;">
+        Data pipeline scaffolded. First batch of features built. Baseline models trained. Honest out-of-sample evaluation in progress — including the friction-aware kind that most published backtests skip. No production trading. No customers. Updates will land on this page as the experiment progresses.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div>© <span id="yr"></span> Prashant Kumar · Calgary, Canada · all rights reserved</div>
+  <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
+  <div style="text-align:right">v5 · 2026-05</div>
+</footer>
+
+<script>
+  const now = new Date();
+  document.getElementById('yr').textContent = now.getFullYear();
+  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const d = document.getElementById('issue-date');
+  if (d) d.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

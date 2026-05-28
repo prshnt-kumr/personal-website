@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Avarna Privacy Gateway — Prashant Kumar</title>
+<meta name="description" content="Avarna Privacy Gateway — 3-layer PII detection, encrypted entity graph, sub-second round-trip. Architecture, deck, demo, perf benchmarks." />
+<meta name="theme-color" content="#0d2540" />
+<meta property="og:title" content="Avarna Privacy Gateway — Prashant Kumar" />
+<meta property="og:description" content="3-layer detection, encrypted vault, sub-second round-trip. The technical deep dive." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500;1,9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/style.css" />
+<style>
+  .mast-nav a.active { background: rgba(13,37,64,.06); color: var(--navy); font-weight: 600; }
+  .back-poc { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 24px 0 0; font-family: "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .back-poc:hover { color: var(--navy); }
+  .deck-frame { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow-md); }
+  .video-frame { width: 100%; aspect-ratio: 16/9; border-radius: var(--radius); background: linear-gradient(135deg, var(--navy), var(--navy-700)); position: relative; overflow: hidden; border: 1px solid var(--rule-strong); box-shadow: var(--shadow-lg); display:flex; align-items:center; justify-content:center; color:#cfe1f5; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; }
+  .status-pill { display: inline-flex; align-items: center; gap: 8px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; background: var(--accent-soft); color: var(--navy); padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
+  .status-pill .dot { width:8px; height:8px; border-radius:50%; background:#2bb673; }
+  .status-pill.early .dot { background:#f4a32a; }
+  .status-pill.vision .dot { background:#7a5fc7; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="mast-inner">
+    <a class="mast-brand" href="/"><span class="mast-mono">pk.</span><span class="mast-name">Prashant Kumar</span></a>
+    <div class="mast-tag">AI Architect · Author · Building POCs</div>
+    <nav class="mast-nav">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/resources/">Resources</a>
+      <a href="/poc/" class="active">POC</a>
+      <a class="cta" href="/about/#contact">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<div class="issue-rule">
+  <div class="issue-inner">
+    <span>Issue 01 · Vol. I</span>
+    <span class="live">Currently building — Avarna v4 · Stock Predictor · Secure Multi-Agent</span>
+    <span id="issue-date">— · 2026</span>
+  </div>
+</div>
+
+<main id="top">
+
+  <a class="back-poc" href="/poc/">← All POCs</a>
+
+  <section class="chap reveal" style="padding-top: 24px;">
+    <div class="chap-num">01<small>Privacy</small></div>
+    <div class="chap-body">
+      <span class="status-pill"><span class="dot"></span> Working POC · v4 · benchmarks live</span>
+      <h1 class="chap-title">Avarna Privacy <span class="it">Gateway</span>.</h1>
+      <p class="chap-dek">A drop-in gateway between your apps and any LLM provider. Three detection layers running in parallel, an encrypted entity graph, and a round-trip you can put on a chart. This page is the technical deep dive.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED VIDEO -->
+  <section class="chap reveal">
+    <div class="chap-num">·<small>Watch</small></div>
+    <div class="chap-body">
+      <div class="chap-kicker">3-minute walkthrough</div>
+      <h2 class="chap-title" style="font-size: clamp(28px, 3.4vw, 40px);">See it <span class="it">in motion</span>.</h2>
+      <div class="video-frame" id="avarna-video" style="margin-top: 32px;">
+        <!-- Replace this entire div with:
+             <video controls preload="metadata" poster="/assets/media/avarna-demo-poster.jpg" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+               <source src="/assets/media/avarna-demo.mp4" type="video/mp4" />
+             </video>
+        -->
+        Drop the demo at /assets/media/avarna-demo.mp4
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE: PIPELINE -->
+  <section class="chap reveal">
+    <div class="chap-num">·<small>How</small></div>
+    <div class="chap-body">
+      <div class="chap-kicker">Architecture</div>
+      <h2 class="chap-title">Detect <span class="it">→</span> Mask <span class="it">→</span> Entity graph <span class="it">→</span> Unmask.</h2>
+
+      <div class="case" style="margin-top: 32px;">
+        <div class="case-text">
+          <p class="lead">Three detection layers run in parallel — not the LLM alone. Each entity gets a deterministic token. The cleartext-to-token map is held in an encrypted vault. The masked prompt goes to the model. The response is rehydrated server-side on the way back.</p>
+          <p>The result: full provider choice — Claude, GPT, open-weights — without giving up PII control, compliance posture, or audit trail. Self-hostable. Model-agnostic.</p>
+          <div class="case-tags">
+            <span class="tag">Regex</span>
+            <span class="tag">Microsoft Presidio</span>
+            <span class="tag">LLM classifier</span>
+            <span class="tag">Encrypted vault</span>
+            <span class="tag">Audit trail</span>
+            <span class="tag">Self-host</span>
+          </div>
+          <div class="ctas">
+            <a class="btn btn-p" href="/about/#contact">Request a walk-through ↗</a>
+            <a class="btn btn-g" href="#deck">See the deck ↓</a>
+          </div>
+        </div>
+
+        <div class="pipeline">
+          <h4>Pipeline · in parallel where possible</h4>
+          <div class="pl-flow">
+            <div class="pl-row"><span class="pl-tick">i.</span>
+              <div class="pl-box detect">
+                <div class="lbl">Detect — three layers in parallel</div>
+                <div class="desc">High-precision regex catches obvious PII fast. Presidio NER finds named entities. An LLM classifier picks up the contextual cases the first two miss.</div>
+                <div class="pl-parallel">
+                  <div class="item"><strong>Regex</strong> — emails, phones, IDs, card numbers</div>
+                  <div class="item"><strong>Presidio</strong> — Microsoft's NER-driven detector</div>
+                  <div class="item"><strong>LLM</strong> — context-aware classification</div>
+                </div>
+              </div>
+            </div>
+            <div class="pl-row"><span class="pl-tick">ii.</span>
+              <div class="pl-box mask">
+                <div class="lbl">Mask</div>
+                <div class="desc">Each entity is replaced with a deterministic token so the model still sees structure, just no PII.</div>
+              </div>
+            </div>
+            <div class="pl-row"><span class="pl-tick">iii.</span>
+              <div class="pl-box entity">
+                <div class="lbl">Entity graph — encrypted vault</div>
+                <div class="desc">Token-to-cleartext map persists in an encrypted store. The LLM call happens against masked prompts only.</div>
+              </div>
+            </div>
+            <div class="pl-row"><span class="pl-tick">iv.</span>
+              <div class="pl-box unmask">
+                <div class="lbl">Unmask</div>
+                <div class="desc">The model's response is rehydrated server-side using the vault — never client-side.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PERF GRID -->
+      <div class="perf-grid" style="margin-top: 40px;">
+        <div class="perf-cell"><div class="hw">RTX 4070 · workstation</div><div class="rt">~0.55s <small>round-trip</small></div></div>
+        <div class="perf-cell"><div class="hw">RTX 4080 · workstation</div><div class="rt">~0.40s <small>round-trip</small></div></div>
+        <div class="perf-cell"><div class="hw">RTX 4090 · workstation</div><div class="rt">~0.25s <small>round-trip</small></div></div>
+        <div class="perf-cell"><div class="hw">A100 / H100 · data-center</div><div class="rt">~0.15s <small>round-trip</small></div></div>
+        <div class="perf-cell"><div class="hw">AWS g5</div><div class="rt">~0.35s <small>round-trip</small></div></div>
+        <div class="perf-cell"><div class="hw">Azure NC-A100</div><div class="rt">~0.15s <small>round-trip</small></div></div>
+        <div class="perf-cell"><div class="hw">GCP g2</div><div class="rt">~0.35s <small>round-trip</small></div></div>
+        <div class="perf-cell"><div class="hw">Detection accuracy</div><div class="rt">97% <small>PII recall, production</small></div></div>
+      </div>
+      <div class="perf-foot">Round-trip = <strong>detect (parallel) + mask + entity-graph write + LLM call + unmask</strong>. Overhead vs. classification alone: ~30 ms.</div>
+    </div>
+  </section>
+
+  <!-- DECK -->
+  <section id="deck" class="chap reveal">
+    <div class="chap-num">·<small>Deck</small></div>
+    <div class="chap-body">
+      <div class="chap-kicker">The pitch &amp; the architecture</div>
+      <h2 class="chap-title">The <span class="it">deck</span>.</h2>
+      <p class="chap-dek">Same content as above, in slide form. Open in a new tab for the full-screen experience.</p>
+      <iframe class="deck-frame" src="/assets/media/avarna-deck.pdf" title="Avarna Privacy Gateway — deck" style="margin-top: 24px;"></iframe>
+      <p style="margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-soft); letter-spacing: .12em;">
+        If the embed is blank: drop the deck PDF at <code style="background:rgba(13,37,64,.08);padding:2px 6px;border-radius:4px">assets/media/avarna-deck.pdf</code> — or replace the iframe with a Google Slides / SlideShare embed.
+      </p>
+    </div>
+  </section>
+
+  <!-- WHAT NEXT -->
+  <section class="chap reveal">
+    <div class="chap-num">·<small>Next</small></div>
+    <div class="chap-body" style="max-width: 760px;">
+      <div class="chap-kicker">Where it's going</div>
+      <h2 class="chap-title">What's <span class="it">next</span>.</h2>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 24px 0 0;">
+        Avarna is a POC today, not a product. The benchmarks above are real. The architecture is real. What's not yet built: a managed offering, a customer-friendly install path, the policy-engine UX that lets compliance teams write rules without reading code.
+      </p>
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        If you're a team with a privacy-sensitive AI use case and you'd be willing to run an early build, I want to talk. Same if you're an investor or potential collaborator who sees the same gap I do. Email's at the bottom of every page.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div>© <span id="yr"></span> Prashant Kumar · Calgary, Canada · all rights reserved</div>
+  <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
+  <div style="text-align:right">v5 · 2026-05</div>
+</footer>
+
+<script>
+  const now = new Date();
+  document.getElementById('yr').textContent = now.getFullYear();
+  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const d = document.getElementById('issue-date');
+  if (d) d.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

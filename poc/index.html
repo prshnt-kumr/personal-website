@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>POC — proofs of concept · Prashant Kumar</title>
-<meta name="description" content="Prashant Kumar's proofs of concept — Avarna Privacy Gateway, Stock Predictor, Multi-Agent Platform, and other explorations." />
+<title>POC — three proofs of concept · Prashant Kumar</title>
+<meta name="description" content="Three working POCs by Prashant Kumar: Avarna Privacy Gateway, Stock Predictor, and a Secure Multi-Agent Framework." />
 <meta name="theme-color" content="#0d2540" />
-<meta property="og:title" content="POC — proofs of concept · Prashant Kumar" />
-<meta property="og:description" content="Avarna · Stock Predictor · Multi-Agent Platform · other experiments." />
+<meta property="og:title" content="POC — three proofs of concept · Prashant Kumar" />
+<meta property="og:description" content="Three proofs of concept — privacy, markets, agents." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,242 +15,21 @@
 <link rel="stylesheet" href="/assets/style.css" />
 <style>
   .mast-nav a.active { background: rgba(13,37,64,.06); color: var(--navy); font-weight: 600; }
-  .back-home { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 8px 0; }
-  .back-home:hover { color: var(--navy); }
-
-  /* === Portrait + bio block === */
-  .portrait-hero {
-    padding: 80px 0 60px;
-    display: grid;
-    grid-template-columns: minmax(280px, 380px) 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-  @media (max-width: 880px) { .portrait-hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 0; } }
-  .portrait {
-    aspect-ratio: 4 / 5;
-    border-radius: var(--radius);
-    background:
-      url('/assets/portrait.jpg') center / cover no-repeat,
-      radial-gradient(circle at 30% 30%, #cdd9e6, transparent 55%),
-      linear-gradient(160deg, #e6ebf2, #95a6ba);
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--rule);
-  }
-  .portrait .placeholder {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; padding: 24px;
-    color: var(--navy);
-    font-family: "Fraunces", serif;
-    font-style: italic;
-    font-size: 14px;
-    background: linear-gradient(160deg, rgba(230,235,242,.92), rgba(149,166,186,.92));
-  }
-  /* Hide placeholder when portrait.jpg loads */
-  .portrait[data-loaded="true"] .placeholder { display: none; }
-
-  .bio-eyebrow {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
-    color: var(--accent-deep);
-    margin-bottom: 18px;
-  }
-  .bio-eyebrow .sep { color: var(--gold); margin: 0 10px; }
-  .bio-name {
-    font-family: "Fraunces", serif;
-    font-weight: 500;
-    font-size: clamp(48px, 6vw, 84px);
-    line-height: .98;
-    letter-spacing: -.03em;
-    color: var(--navy);
-    margin: 0 0 12px;
-  }
-  .bio-name .it { font-style: italic; color: var(--accent); }
-  .bio-role {
-    font-family: "Fraunces", serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(18px, 1.6vw, 22px);
-    color: var(--ink-dim);
-    margin: 0 0 24px;
-  }
-  .bio-role em { font-style: normal; color: var(--accent-deep); font-weight: 500; }
-  .bio-blurb {
-    font-size: 16px;
-    color: var(--ink-dim);
-    line-height: 1.65;
-    max-width: 580px;
-    margin: 0 0 24px;
-  }
-  .bio-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
-
-  /* === Latest & Trending strip === */
-  .latest-strip {
-    padding: 60px 0 40px;
-    border-top: 1px solid var(--rule);
-  }
-  .latest-head {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
-  }
-  .latest-head h2 {
-    font-family: "Fraunces", serif;
-    font-weight: 500;
-    font-size: clamp(26px, 3vw, 38px);
-    color: var(--navy);
-    letter-spacing: -.018em;
-    margin: 0;
-  }
-  .latest-head h2 .it { font-style: italic; color: var(--accent); }
-  .latest-head .updated {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    color: var(--ink-soft);
-    letter-spacing: .14em; text-transform: uppercase;
-  }
-  .latest-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  @media (max-width: 880px) { .latest-grid { grid-template-columns: 1fr; } }
-  .lcard {
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 28px;
-    display: flex; flex-direction: column;
-    text-decoration: none;
-    box-shadow: var(--shadow-sm);
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    position: relative;
-  }
-  .lcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--rule-strong); }
-  .lcard.featured { border-top: 3px solid var(--accent); }
-  .lcard .badge {
-    align-self: flex-start;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10px;
-    letter-spacing: .16em; text-transform: uppercase;
-    padding: 3px 9px;
-    border-radius: 999px;
-    background: var(--accent-soft);
-    color: var(--navy);
-    margin-bottom: 14px;
-  }
-  .lcard .meta {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10.5px;
-    letter-spacing: .16em; text-transform: uppercase;
-    color: var(--accent-deep);
-    margin-bottom: 10px;
-  }
-  .lcard h3 {
-    font-family: "Fraunces", serif;
-    font-weight: 500;
-    font-size: 22px;
-    color: var(--navy);
-    margin: 0 0 8px;
-    line-height: 1.18;
-    letter-spacing: -.012em;
-  }
-  .lcard h3 .it { font-style: italic; color: var(--accent); }
-  .lcard p { color: var(--ink-dim); font-size: 14px; margin: 0 0 16px; line-height: 1.55; flex: 1; }
-  .lcard .read {
-    color: var(--navy);
-    font-weight: 600;
-    font-size: 13.5px;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .lcard .arr { transition: transform .2s ease; }
-  .lcard:hover .arr { transform: translate(4px,0); }
-
-  /* === Now building strip === */
-  .now-strip {
-    padding: 50px 0 30px;
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 40px;
-    border-top: 1px solid var(--rule);
-  }
-  @media (max-width: 880px) { .now-strip { grid-template-columns: 1fr; gap: 16px; } }
-  .now-strip h3 {
-    font-family: "Fraunces", serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 26px;
-    color: var(--navy);
-    letter-spacing: -.012em;
-    margin: 0;
-  }
-  .now-strip h3 small {
-    display: block;
-    font-family: "JetBrains Mono", monospace;
-    font-style: normal;
-    font-size: 10px;
-    color: var(--ink-soft);
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-  .now-list-clean { list-style: none; padding: 0; margin: 0; }
-  .now-list-clean li {
-    padding: 14px 0;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 110px 1fr auto;
-    gap: 18px;
-    align-items: baseline;
-  }
-  .now-list-clean li:last-child { border-bottom: 0; }
-  .now-list-clean .when {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 10.5px;
-    color: var(--ink-soft);
-    letter-spacing: .14em; text-transform: uppercase;
-  }
-  .now-list-clean .what { color: var(--ink); font-size: 15.5px; }
-  .now-list-clean .what em { color: var(--accent-deep); font-style: normal; font-weight: 500; }
-  .now-list-clean .tag-status {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  /* === Sign off === */
-  .signoff-clean {
-    padding: 80px 0 60px;
-    border-top: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-  @media (max-width: 880px) { .signoff-clean { grid-template-columns: 1fr; gap: 24px; padding: 56px 0; } }
-  .signoff-clean p {
-    font-family: "Fraunces", serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(22px, 2.4vw, 30px);
-    color: var(--navy);
-    line-height: 1.32;
-    margin: 0;
-    letter-spacing: -.012em;
-  }
-  .signoff-clean p em { font-style: normal; color: var(--accent); }
+  .back-poc { display: inline-flex; align-items: center; gap: 8px; color: var(--ink-dim); text-decoration: none; font-size: 13px; padding: 24px 0 0; font-family: "JetBrains Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .back-poc:hover { color: var(--navy); }
+  .deck-frame { width: 100%; aspect-ratio: 16/9; border: 1px solid var(--rule); border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow-md); }
+  .video-frame { width: 100%; aspect-ratio: 16/9; border-radius: var(--radius); background: linear-gradient(135deg, var(--navy), var(--navy-700)); position: relative; overflow: hidden; border: 1px solid var(--rule-strong); box-shadow: var(--shadow-lg); display:flex; align-items:center; justify-content:center; color:#cfe1f5; font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; }
+  .status-pill { display: inline-flex; align-items: center; gap: 8px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; background: var(--accent-soft); color: var(--navy); padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; }
+  .status-pill .dot { width:8px; height:8px; border-radius:50%; background:#2bb673; }
+  .status-pill.early .dot { background:#f4a32a; }
+  .status-pill.vision .dot { background:#7a5fc7; }
 </style>
 </head>
 <body>
 
 <header class="masthead">
   <div class="mast-inner">
-    <a class="mast-brand" href="/">
-      <span class="mast-mono">pk.</span>
-      <span class="mast-name">Prashant Kumar</span>
-    </a>
+    <a class="mast-brand" href="/"><span class="mast-mono">pk.</span><span class="mast-name">Prashant Kumar</span></a>
     <div class="mast-tag">AI Architect · Author · Building POCs</div>
     <nav class="mast-nav">
       <a href="/">Home</a>
@@ -265,7 +44,7 @@
 <div class="issue-rule">
   <div class="issue-inner">
     <span>Issue 01 · Vol. I</span>
-    <span class="live">Currently building — Avarna v4 · Stock Predictor · Multi-Agent</span>
+    <span class="live">Currently building — Avarna v4 · Stock Predictor · Secure Multi-Agent</span>
     <span id="issue-date">— · 2026</span>
   </div>
 </div>
@@ -276,147 +55,33 @@
     <div class="chap-num">·<small>POC</small></div>
     <div class="chap-body">
       <div class="chap-kicker">Proofs of concept</div>
-      <h1 class="chap-title">What I'm <span class="it">building</span>.</h1>
-      <p class="chap-dek">Each one is a working prototype, not yet a product or a company. The architecture, the numbers, the honest status — all on these pages.</p>
+      <h1 class="chap-title">Three things I'm <span class="it">building</span>.</h1>
+      <p class="chap-dek">Each one is a working prototype, not a product or a company. Click in for the details, decks, demos, and current status. Updated as we go.</p>
 
-      <div class="practice" style="grid-template-columns: repeat(2, 1fr); margin-top: 32px;">
-        <a href="#avarna" class="pcard" style="text-decoration: none; grid-column: span 1; display:flex; flex-direction:column;">
+      <div class="practice" style="grid-template-columns: repeat(3, 1fr); margin-top: 40px; gap: 20px;">
+
+        <a href="/poc/avarna/" class="pcard" style="text-decoration:none; grid-column: span 1; display:flex; flex-direction:column; min-height: 280px;">
           <div class="pnum">01 · Privacy</div>
           <h3>Avarna Privacy <span class="it">Gateway</span></h3>
-          <p>3-layer PII detection · 97% accuracy · sub-second round-trip on consumer GPUs. Encrypted entity graph. Model-agnostic.</p>
-          <div class="pmeta" style="margin-top: auto"><span class="tag">Working POC · v4</span><span class="tag">Read more ↓</span></div>
+          <p>A drop-in privacy gateway between your app and any LLM provider. Three-layer PII detection, encrypted entity graph, sub-second round-trip.</p>
+          <div class="pmeta" style="margin-top: auto"><span class="tag">Working POC · v4</span><span class="tag">Technical deep dive →</span></div>
         </a>
-        <a href="#stock" class="pcard" style="text-decoration: none; grid-column: span 1; display:flex; flex-direction:column;">
+
+        <a href="/poc/stock-predictor/" class="pcard" style="text-decoration:none; grid-column: span 1; display:flex; flex-direction:column; min-height: 280px;">
           <div class="pnum">02 · Markets</div>
           <h3>Stock <span class="it">Predictor</span></h3>
-          <p>Quantitative model exploration combining classical features and learned representations. Details &amp; results to come as the POC matures.</p>
-          <div class="pmeta" style="margin-top: auto"><span class="tag">Early POC</span><span class="tag">[Status TBD]</span></div>
+          <p>A research POC for testing whether modern ML can find tradable edges in public market data — and what it would take to put that edge into a real workflow.</p>
+          <div class="pmeta" style="margin-top: auto"><span class="tag">Early POC</span><span class="tag">Business framing →</span></div>
         </a>
-        <a href="#multiagent" class="pcard" style="text-decoration: none; grid-column: span 1; display:flex; flex-direction:column;">
+
+        <a href="/poc/multi-agent/" class="pcard" style="text-decoration:none; grid-column: span 1; display:flex; flex-direction:column; min-height: 280px;">
           <div class="pnum">03 · Agents</div>
-          <h3>Multi-Agent <span class="it">Platform</span></h3>
-          <p>An orchestration substrate for agent collaboration — planning, tool-use, memory, evals. Architecture write-up when the v0 is stable.</p>
-          <div class="pmeta" style="margin-top: auto"><span class="tag">Early POC</span><span class="tag">[Status TBD]</span></div>
+          <h3>Secure Multi-Agent <span class="it">Framework</span></h3>
+          <p>A substrate for cooperating agents that treats security and privacy as first-class concerns — not afterthoughts bolted on at the demo stage.</p>
+          <div class="pmeta" style="margin-top: auto"><span class="tag">Vision · early build</span><span class="tag">The vision →</span></div>
         </a>
-        <a href="#others" class="pcard" style="text-decoration: none; grid-column: span 1; display:flex; flex-direction:column;">
-          <div class="pnum">04 · Others</div>
-          <h3>Other <span class="it">explorations</span></h3>
-          <p>Small, sharp experiments — released under permissive licenses. The full list will surface here once the GitHub feed is linked.</p>
-          <div class="pmeta" style="margin-top: auto"><span class="tag">Coming soon</span><span class="tag">GitHub link pending</span></div>
-        </a>
+
       </div>
-    </div>
-  </section>
-
-  <section id="avarna" class="chap reveal">
-    <div class="chap-num">02<small>Product</small></div>
-    <div class="chap-body">
-      <div class="chap-kicker">Avarna Privacy Gateway · working POC</div>
-      <h2 class="chap-title">Privacy you can <span class="it">prove</span>, not just promise.</h2>
-      <p class="chap-dek">A drop-in gateway between your apps and any LLM provider. Three detection layers in parallel, an encrypted entity graph, and a round-trip you can put on a chart. <span style="font-style:italic;color:var(--ink-soft)">Status — working prototype; no company yet.</span></p>
-
-      <div class="case">
-        <div class="case-text">
-          <p class="lead">Avarna intercepts AI traffic before it leaves your perimeter — detecting PII with three layers in parallel, masking it, holding the cleartext-to-token map in an encrypted entity graph, and unmasking the model's response on the way back.</p>
-          <p>The prototype already supports full provider choice — Claude, GPT, open-weights — without the compliance headache. Self-hostable. Model-agnostic. With an auditable trail of every prompt and every byte that crossed the wire. It is a POC today, not a product yet.</p>
-
-          <div class="case-tags">
-            <span class="tag">Regex</span>
-            <span class="tag">Microsoft Presidio</span>
-            <span class="tag">LLM classifier</span>
-            <span class="tag">Encrypted vault</span>
-            <span class="tag">Audit trail</span>
-            <span class="tag">Self-host</span>
-          </div>
-
-          <div class="ctas">
-            <a class="btn btn-p" href="/about/#contact">See the POC <span class="arr">↗</span></a>
-            <a class="btn btn-g" href="/">Watch the 3-min walkthrough</a>
-          </div>
-        </div>
-
-        <div class="pipeline">
-          <h4>Pipeline · Detect → Mask → Entity Graph → Unmask</h4>
-          <div class="pl-flow">
-            <div class="pl-row">
-              <span class="pl-tick">i.</span>
-              <div class="pl-box detect">
-                <div class="lbl">Detect — in parallel</div>
-                <div class="desc">Three layers find PII before anything leaves.</div>
-                <div class="pl-parallel">
-                  <div class="item"><strong>Regex</strong> — high-precision patterns (emails, IDs, phones)</div>
-                  <div class="item"><strong>Presidio</strong> — Microsoft's NER-driven detector</div>
-                  <div class="item"><strong>LLM classifier</strong> — context-aware catches the other two miss</div>
-                </div>
-              </div>
-            </div>
-            <div class="pl-row">
-              <span class="pl-tick">ii.</span>
-              <div class="pl-box mask">
-                <div class="lbl">Mask</div>
-                <div class="desc">Each entity is replaced with a deterministic token.</div>
-              </div>
-            </div>
-            <div class="pl-row">
-              <span class="pl-tick">iii.</span>
-              <div class="pl-box entity">
-                <div class="lbl">Entity graph — encrypted vault</div>
-                <div class="desc">Token-to-cleartext map persists in an encrypted store. The LLM call then happens against masked prompts only.</div>
-              </div>
-            </div>
-            <div class="pl-row">
-              <span class="pl-tick">iv.</span>
-              <div class="pl-box unmask">
-                <div class="lbl">Unmask</div>
-                <div class="desc">The model's response is rehydrated server-side using the vault — never client-side.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Perf grid -->
-      <div class="perf-grid">
-        <div class="perf-cell"><div class="hw">RTX 4070 · workstation</div><div class="rt">~0.55s <small>round-trip</small></div></div>
-        <div class="perf-cell"><div class="hw">RTX 4080 · workstation</div><div class="rt">~0.40s <small>round-trip</small></div></div>
-        <div class="perf-cell"><div class="hw">RTX 4090 · workstation</div><div class="rt">~0.25s <small>round-trip</small></div></div>
-        <div class="perf-cell"><div class="hw">A100 / H100 · data-center</div><div class="rt">~0.15s <small>round-trip</small></div></div>
-        <div class="perf-cell"><div class="hw">AWS g5</div><div class="rt">~0.35s <small>round-trip</small></div></div>
-        <div class="perf-cell"><div class="hw">Azure NC-A100</div><div class="rt">~0.15s <small>round-trip</small></div></div>
-        <div class="perf-cell"><div class="hw">GCP g2</div><div class="rt">~0.35s <small>round-trip</small></div></div>
-        <div class="perf-cell"><div class="hw">Detection accuracy</div><div class="rt">97% <small>PII recall, production</small></div></div>
-      </div>
-      <div class="perf-foot">Round-trip = <strong>detect (parallel) + mask + entity-graph write + LLM call + unmask</strong>. Overhead vs. classification alone: ~30 ms.</div>
-    </div>
-  </section>
-
-  <section id="stock" class="chap reveal">
-    <div class="chap-num">02<small>Stock</small></div>
-    <div class="chap-body">
-      <div class="chap-kicker">Stock Predictor · early POC</div>
-      <h2 class="chap-title">A quantitative <span class="it">exploration</span>.</h2>
-      <p class="chap-dek">Combining classical features with learned representations — a POC for testing whether modern ML pipelines can produce signal beyond the noise floor. Methodology and results land here as the experiment runs its course.</p>
-      <p style="color: var(--ink-dim); font-size: 16px; max-width: 640px;"><em>Status:</em> in progress. <em>Repo:</em> [private until v0]. Watch this section for the writeup.</p>
-    </div>
-  </section>
-
-  <section id="multiagent" class="chap reveal">
-    <div class="chap-num">03<small>Agents</small></div>
-    <div class="chap-body">
-      <div class="chap-kicker">Multi-Agent Platform · early POC</div>
-      <h2 class="chap-title">Substrate for <span class="it">agent collaboration</span>.</h2>
-      <p class="chap-dek">A working prototype of how multiple agents can plan, share tools, and hand off context — with evals at every seam. Architecture diagram and first results will publish when v0 stabilizes.</p>
-      <p style="color: var(--ink-dim); font-size: 16px; max-width: 640px;"><em>Status:</em> design + prototype. <em>Repo:</em> [private until v0]. Detailed writeup pending.</p>
-    </div>
-  </section>
-
-  <section id="others" class="chap reveal">
-    <div class="chap-num">04<small>Other</small></div>
-    <div class="chap-body">
-      <div class="chap-kicker">Other explorations</div>
-      <h2 class="chap-title">Small, sharp <span class="it">experiments</span>.</h2>
-      <p class="chap-dek">Permissive-licensed tools, side experiments, and one-day hacks. Once the GitHub feed is wired up, the most recent will surface here automatically.</p>
-      <p style="color: var(--ink-dim); font-size: 16px; max-width: 640px;"><em>Status:</em> placeholder. Drop GitHub username in <code style="font-family:'JetBrains Mono',monospace;background:rgba(13,37,64,.08);padding:2px 6px;border-radius:4px">memory/user_profile.md</code> and the agent will pull repos in on the next weekly run.</p>
     </div>
   </section>
 
@@ -425,26 +90,19 @@
 <footer class="colophon">
   <div>© <span id="yr"></span> Prashant Kumar · Calgary, Canada · all rights reserved</div>
   <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
-  <div style="text-align:right">v4 · 2026-05</div>
+  <div style="text-align:right">v5 · 2026-05</div>
 </footer>
 
 <script>
   const now = new Date();
   document.getElementById('yr').textContent = now.getFullYear();
   const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  const dateEl = document.getElementById('issue-date');
-  if (dateEl) dateEl.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
+  const d = document.getElementById('issue-date');
+  if (d) d.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.10 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  // If portrait.jpg loads successfully, mark portrait container so placeholder hides
-  const portrait = document.querySelector('.portrait');
-  if (portrait) {
-    const img = new Image();
-    img.onload = () => portrait.setAttribute('data-loaded', 'true');
-    img.src = '/assets/portrait.jpg';
-  }
 </script>
 
 </body>

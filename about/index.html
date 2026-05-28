@@ -309,11 +309,7 @@
       </p>
 
       <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
-        Right now I'm building a few proofs of concept. The main one is <em style="color:var(--navy);font-style:italic;font-weight:500">Avarna</em>, a privacy gateway that sits between an app and an LLM provider and handles PII detection, masking, and unmasking. The detection runs three things in parallel: regex, Microsoft Presidio, and an LLM classifier. In benchmarks it catches about 97% of PII, and the full round-trip is under a second on a regular consumer GPU. It's self-hostable and works with any model. It's a working POC. There is no company.
-      </p>
-
-      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
-        Two other projects are earlier. One is a stock predictor I've been using to experiment with feature representations on noisy financial data. The other is a multi-agent platform for orchestration and tool-use. Both will get proper write-ups on this site when there's something worth writing about.
+        Outside of the book, I'm building a few proofs of concept. The main one is a privacy gateway. There's also a stock predictor and a multi-agent platform, both earlier. All of them are working POCs, not companies. The details, demos, and decks live on <a href="/poc/" style="color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--accent)">the POC page</a> — that's where to go if you want to dig in.
       </p>
 
       <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
@@ -342,4 +338,72 @@
         <article class="jcard">
           <div class="when">2026 — now</div>
           <div class="what">Building <em>Avarna Privacy Gateway</em> (POC)</div>
-     
+          <p class="why">Turning the privacy work in the book into a working prototype. No company formed — yet.</p>
+        </article>
+        <article class="jcard">
+          <div class="when">2025</div>
+          <div class="what">Published <em>Machine Learning to Gen AI Agents</em></div>
+          <p class="why">A field guide from foundations to agents. Audio in production.</p>
+        </article>
+        <article class="jcard">
+          <div class="when">2020 → 2024</div>
+          <div class="what">Shipping <em>LLM &amp; ML systems</em> in industry</div>
+          <p class="why">From classical ML pipelines to retrieval, agents, and fine-tuned open-weights.</p>
+        </article>
+        <article class="jcard">
+          <div class="when">Earlier</div>
+          <div class="what">Engineering <em>foundations</em></div>
+          <p class="why">Backend, data, distributed systems — the unglamorous stack AI rests on.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="chap reveal">
+    <div class="chap-num" style="color:#9cc4f0">07<small>Contact</small></div>
+    <div class="chap-body">
+      <div class="signoff">
+        <div>
+          <div class="kk">Sign-off</div>
+          <h2>Let's build something <span class="it">trustworthy</span>.</h2>
+          <p>Avarna POC walkthroughs, book inquiries, speaking, teaching, or a good AI conversation — my inbox is open.</p>
+        </div>
+        <div class="signoff-links">
+          <a class="so-link" href="mailto:prshntkumr@gmail.com">Email — prshntkumr@gmail.com <span class="ar">↗</span></a>
+          <a class="so-link" href="https://github.com/" target="_blank" rel="noopener">GitHub — code &amp; small sharp tools <span class="ar">↗</span></a>
+          <a class="so-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn — the formal résumé <span class="ar">↗</span></a>
+          <a class="so-link" href="#">X / Twitter — short notes <span class="ar">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="colophon">
+  <div>© <span id="yr"></span> Prashant Kumar · Calgary, Canada · all rights reserved</div>
+  <div class="mid">Set in Fraunces &amp; Inter. Maintained by an agent, hosted on <a href="https://www.netlify.com" target="_blank" rel="noopener">Netlify</a>.</div>
+  <div style="text-align:right">v4 · 2026-05</div>
+</footer>
+
+<script>
+  const now = new Date();
+  document.getElementById('yr').textContent = now.getFullYear();
+  const months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const dateEl = document.getElementById('issue-date');
+  if (dateEl) dateEl.textContent = `${months[now.getMonth()]} · ${now.getFullYear()}`;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.10 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  // If portrait.jpg loads successfully, mark portrait container so placeholder hides
+  const portrait = document.querySelector('.portrait');
+  if (portrait) {
+    const img = new Image();
+    img.onload = () => portrait.setAttribute('data-loaded', 'true');
+    img.src = '/assets/portrait.jpg';
+  }
+</script>
+
+</body>
+</html>
