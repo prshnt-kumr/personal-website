@@ -280,49 +280,66 @@
       </div>
     </div>
     <div>
-      <div class="bio-eyebrow">About <span class="sep">·</span> Calgary, Canada <span class="sep">·</span> est. 2026</div>
-      <h1 class="bio-name">Engineer at heart, <span class="it">architect</span> by trade.</h1>
-      <p class="bio-role" style="margin-bottom: 30px;">
-        I build the parts of AI that don't fit on a slide.
-      </p>
-      <p class="bio-blurb">
-        I'm <em>Prashant Kumar</em> — an applied AI/ML engineer turned architect, working out of Calgary on the unglamorous parts of intelligent software: the privacy, the evals, the deployment seams that decide whether a prototype graduates to production or stays a demo forever.
+      <div class="bio-eyebrow">About <span class="sep">·</span> Calgary, Canada</div>
+      <h1 class="bio-name">Hi, I'm <span class="it">Prashant</span>.</h1>
+      <p class="bio-blurb" style="margin-top: 20px;">
+        I work in AI, mostly the production side of it. This page is a quick rundown of what I do, what I've built, and how to get hold of me.
       </p>
       <div class="bio-ctas">
-        <a class="btn btn-p" href="#contact">Get in touch <span class="arr">↗</span></a>
+        <a class="btn btn-p" href="#contact">Email me <span class="arr">↗</span></a>
         <a class="btn btn-s" href="/resources/">Read the book</a>
       </div>
     </div>
   </section>
 
-  <!-- The arc — long-form bio -->
+  <!-- Plain bio -->
   <section class="chap reveal">
-    <div class="chap-num">·<small>Story</small></div>
-    <div class="chap-body" style="max-width: 760px;">
-      <div class="chap-kicker">The arc, in plain English</div>
-      <h2 class="chap-title">From backend pipes to <span class="it">privacy-first agents</span>.</h2>
-
-      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 28px 0 0;">
-        My career started where most don't admit it does — in the <em style="color:var(--accent-deep);font-style:normal;font-weight:500">unsexy plumbing</em>. Backend services, distributed systems, the data layer underneath the data layer. The kind of work that doesn't make the keynote but quietly determines whether anything on stage will keep running on Monday morning.
-      </p>
-
-      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 20px 0 0;">
-        That foundation became the launchpad. As machine learning moved out of research and into shipped product, I followed the wave — first classical ML pipelines, then retrieval-augmented systems, then fine-tuned open-weights models, then the agentic systems we're now arguing about whether to trust. Each step taught me the same lesson from a different angle: <em style="color:var(--navy);font-style:italic;font-weight:500">the model is the easy part. Everything around it is where products live or die.</em>
-      </p>
-
-      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 20px 0 0;">
-        Somewhere along that path I realized the field needed a working map. Not another tutorial that ends at "and now you have an LLM app." A field guide that takes a reader from gradient descent all the way to multi-agent orchestration without losing the thread, and treats the parts that hurt — evals, MLOps, safety, privacy — as first-class citizens rather than appendices. That guide became <em style="color:var(--navy);font-style:italic;font-weight:500">Machine Learning to Gen AI Agents</em>: eighteen chapters, a 177-term glossary, and roughly a year of compressed disagreement with everyone who told me a particular chapter wasn't necessary.
-      </p>
-
-      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 20px 0 0;">
-        Writing the book made the gap obvious. The privacy chapter described tools that mostly didn't exist outside research papers. So I started building them. That's what <em style="color:var(--navy);font-style:italic;font-weight:500">Avarna Privacy Gateway</em> is: a POC for the privacy layer the book argued every AI product should have from day one. Three detection layers running in parallel — regex, Microsoft Presidio, and an LLM classifier — masking PII before prompts leave your perimeter, holding the cleartext-to-token map in an encrypted vault, and unmasking the response on the way back. Sub-second round-trip on consumer GPUs. 97% recall in benchmarks. Self-hostable. Model-agnostic. Working today; not yet a company.
-      </p>
-
-      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 20px 0 0;">
-        Avarna is the most mature of the prototypes on this site, but it isn't the only one. A <em style="color:var(--navy);font-style:italic;font-weight:500">stock predictor</em> is exploring whether modern feature representations can find signal above the noise floor of public markets. A <em style="color:var(--navy);font-style:italic;font-weight:500">multi-agent platform</em> is taking shape as a substrate for planning, tool-use, and clean inter-agent handoffs — the kind of orchestration the field still mostly improvises. None of these have customers. All of them have running code.
-      </p>
-
-      <h3 style="font-family: 'Fraunces', serif; font-weight: 500; font-size: 26px; color: var(--navy); margin: 40px 0 12px; letter-spacing: -.012em;">What I actually believe.</h3>
+    <div class="chap-body" style="max-width: 720px; padding-top: 32px;">
 
       <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 0;">
-        The f
+        I started out as a backend engineer. APIs, services, databases, the usual. A few years in, I started working with machine learning on the data side, mostly because someone on the team needed help and I was curious enough to keep going after I'd helped. That turned into doing more ML, then more, until at some point I wasn't really a backend engineer anymore. I'm based in Calgary.
+      </p>
+
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        Most of my last few years has been LLMs. RAG, fine-tuning open-weights models for specific tasks, evals, and the agent stuff that's been showing up in real production this past year. The title I use now is AI Architect because most of what I do is figuring out how the pieces fit together rather than writing all the code, though I still write plenty of code.
+      </p>
+
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        In 2025 I finished a book, <em style="color:var(--navy);font-style:italic;font-weight:500">Machine Learning to Gen AI Agents</em>. It's 18 chapters plus appendices and a glossary of 177 terms. The idea was one book that takes you from classical ML through to modern agents without skipping the boring parts in the middle, since the boring parts are where most projects actually go wrong. There's a print edition and a Kindle one. The audio edition is in production.
+      </p>
+
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        Right now I'm building a few proofs of concept. The main one is <em style="color:var(--navy);font-style:italic;font-weight:500">Avarna</em>, a privacy gateway that sits between an app and an LLM provider and handles PII detection, masking, and unmasking. The detection runs three things in parallel: regex, Microsoft Presidio, and an LLM classifier. In benchmarks it catches about 97% of PII, and the full round-trip is under a second on a regular consumer GPU. It's self-hostable and works with any model. It's a working POC. There is no company.
+      </p>
+
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        Two other projects are earlier. One is a stock predictor I've been using to experiment with feature representations on noisy financial data. The other is a multi-agent platform for orchestration and tool-use. Both will get proper write-ups on this site when there's something worth writing about.
+      </p>
+
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        One opinion I'll volunteer here, because it shapes everything else: I think most teams spend too little time on evals. Models are easy to swap. Eval suites that actually predict production behaviour are not. If you're building with LLMs and your eval setup feels embarrassing, you're in the same boat as most of the field, and it's the highest-leverage thing you can fix.
+      </p>
+
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 22px 0 0;">
+        Outside of work I read a lot, mostly non-fiction. Calgary is a good city for that.
+      </p>
+
+      <p style="font-size: 17px; color: var(--ink-dim); line-height: 1.75; margin: 32px 0 40px;">
+        If you want to reach out — about the book, about Avarna, about something you're working on, about giving a talk somewhere, or just a question — my email is at the bottom of this page. I usually reply the same day.
+      </p>
+
+    </div>
+  </section>
+
+  <section id="journey" class="chap reveal">
+    <div class="chap-num">06<small>Path</small></div>
+    <div class="chap-body">
+      <div class="chap-kicker">Landmarks</div>
+      <h2 class="chap-title">A short <span class="it">journey</span>, in landmarks.</h2>
+      <p class="chap-dek">Four cards. The agent adds new ones as new things ship.</p>
+
+      <div class="journey-band">
+        <article class="jcard">
+          <div class="when">2026 — now</div>
+          <div class="what">Building <em>Avarna Privacy Gateway</em> (POC)</div>
+     
